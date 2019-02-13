@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class ProjectileShooter : MonoBehaviour
 {
-    GameObject prefab;
+    public GameObject prefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        prefab = Resources.Load("projectile") as GameObject;  
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             //To shoot we will make a new gameobject, a new variable, to hold the new projectile
             GameObject projectile = Instantiate(prefab) as GameObject;
+            projectile.gameObject.SetActive(true);
             //Putting it at the right place and making it move in the right direction
             projectile.transform.position = transform.position + Camera.main.transform.forward * 2;
             //^ setting projectile to position of the player, but by timing it with 2, the projectile doesn't spawn in the player

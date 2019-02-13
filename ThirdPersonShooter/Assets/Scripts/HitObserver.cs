@@ -24,7 +24,7 @@ public class HitObserver : MonoBehaviour
         //    Destroy(collision.gameObject);
         //}
 
-        if (collision.gameObject.name == "enemy")
+        if (collision.gameObject.tag == "enemy")
         {
             Destroy(collision.gameObject);
         }
