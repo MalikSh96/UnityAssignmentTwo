@@ -16,6 +16,6 @@ public class ResetHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        print("controlling reset");
+        //print("controlling reset");
     }
 }
