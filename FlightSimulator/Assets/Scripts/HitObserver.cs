@@ -29,11 +29,13 @@ public class HitObserver : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         //When the collision happens remove the object using Destroy
-        pickUpSound.Play();
-        Destroy(collision.gameObject);
-        //Destroy(gameObject);
-        
-        counter++;
+       
+        if (collision.gameObject.tag == "pickup")
+        {
+            pickUpSound.Play();
+            Destroy(collision.gameObject);
+            counter++;
+        }
         print(counter);
     }
 }
