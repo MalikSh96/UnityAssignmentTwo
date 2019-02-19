@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Timers;
+using DG.Tweening;
 
 public class Movement : MonoBehaviour
 {
@@ -14,13 +15,24 @@ public class Movement : MonoBehaviour
     float posZ;
     float targetX = 10;
 
+    Vector3 startPosition;
+    Vector3 endPosition;
+    public float lerpValue;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        startPosition = transform.position;
+        endPosition = new Vector3(10, 1, 1);
+
         posX = transform.position.x;
         posY = transform.position.y;
         posZ = transform.position.z;
         //StartCoroutine("CoroutineDemo");
+        //MoveDoTween();
+
+        FindGameObject();
     }
 
     // Update is called once per frame
@@ -29,10 +41,14 @@ public class Movement : MonoBehaviour
         posX = transform.position.x;
         posY = transform.position.y;
         posZ = transform.position.z;
-        if(Timer())
-        {
-            MoveBasicTweening();
-        }
+        
+        //if(Timer())
+        //{
+        //    MoveBasicTweening();
+        //}
+
+        //MoveLerp();
+        
     }
 
     bool Timer()
@@ -43,6 +59,13 @@ public class Movement : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    void MoveLerp()
+    {
+        transform.position = Vector3.Lerp(startPosition, endPosition, lerpValue);
+        transform.localScale = Vector3.Lerp(startPosition, endPosition, lerpValue);
+        lerpValue += 0.01f;
     }
 
     void MoveBasicTweening()
@@ -72,5 +95,15 @@ public class Movement : MonoBehaviour
             print("Goodbye World");
         }
         yield return null;
+    }
+
+    void MoveDoTween()
+    {
+        transform.DOMoveX(10, 1);
+    }
+
+    void FindGameObject()
+    {
+        GameObject.Find("Sphere").GetComponent<Rigidbody>().useGravity = false; // can only be used when searching for one object
     }
 }
