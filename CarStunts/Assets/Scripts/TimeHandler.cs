@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeHandler : MonoBehaviour
 {
-    float currentCountDownValue;
+    int currentCountDownValue;
     GameObject car;
+    public Text text;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +27,11 @@ public class TimeHandler : MonoBehaviour
     //Works, needs to be displayed on UI
     public IEnumerator StartCountdown()
     {
-        float countdownValue = 10;
+        int countdownValue = 10;
         currentCountDownValue = countdownValue;
-        while (currentCountDownValue > 0)
+        while (currentCountDownValue >= 0)
         {
-            print("Countdown: " + currentCountDownValue);
+            text.text = "Countdown: " + currentCountDownValue;
             //Debug.Log("Countdown: " + currentCountDownValue);
             yield return new WaitForSeconds(1.0f);
             currentCountDownValue--;
@@ -39,7 +41,7 @@ public class TimeHandler : MonoBehaviour
     //Does not work
     void OnTriggerEnter(Collider c)
     {
-        if (c.gameObject.tag == "ramp")
+        if (c.tag == "ramp")
         {
             currentCountDownValue += 10;
         }
